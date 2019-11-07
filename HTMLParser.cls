@@ -176,5 +176,20 @@ public with sharing class HTMLParser {
 		System.debug('@@@ value to return: ' + valueToReturn);
 		return valueToReturn;
 	}
+	
+	public static String replaceTags(String s, String tag, String replacement, Boolean all) {
+		String stringToReturn = s;
+		if(stringToReturn.indexOf(tag) != -1){
+		    if(!all){
+			stringToReturn.replace(tag, replacement);
+		    } else {
+			stringToReturn = stringToReturn.replace(tag, replacement);
+			if(stringToReturn.indexOf(tag) != -1){
+			    replaceTags(stringToReturn, tag, replacement, all);
+			}
+		    }
+		}
+		return stringToReturn;
+	}
 
 }
